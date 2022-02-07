@@ -2,23 +2,23 @@
     "name": "Homograph Attack Detector",
     "description": "Detects and flags possible homograph attacks using a multi-pronged approach",
     "version": "0.1.0",
-    "manifest_version": 3,
+    "manifest_version": 2,
+    "permissions": [
+        "tabs",
+        "webRequest",
+        "webRequestBlocking",
+        "<all_urls>"
+    ],
     "icons": {
         "128": "/images/icon.png"
     },
     "background": {
-        "service_worker": "background-scripts/background.js"
+        "scripts": ["background-scripts/background.js"]
     },
-    "action": {
+    "browser_action": {
         "default_icon": {
             "128": "/images/icon.png"
         }
-    },
-    "permissions": [
-        "storage",
-        "activeTab",
-        "scripting",
-        "tabs",
-        "webRequest"
-    ]
+    }
+   
 }
