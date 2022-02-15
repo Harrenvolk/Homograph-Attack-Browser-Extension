@@ -38,14 +38,14 @@ def find_optimal_cutoff(target, predicted):
 
 
 
-dataset_type = "process"
+dataset_type = "domain"
 
 OUTPUT_DIR = 'output'
 
-OUTPUT_FILE = os.path.join(OUTPUT_DIR, 'process_results.pkl')
-INPUT_FILE = os.path.join('homo-data', 'process_spoof.pkl')
-IMAGE_FILE = os.path.join(OUTPUT_DIR, 'process_roc_curve.png')
-OUTPUT_NAME = 'Process Spoofing'
+OUTPUT_FILE = os.path.join(OUTPUT_DIR, 'domain_results.pkl')
+INPUT_FILE = os.path.join('homo-data', 'domain_spoof.pkl')
+IMAGE_FILE = os.path.join(OUTPUT_DIR, 'domain_roc_curve.png')
+OUTPUT_NAME = 'Domain Spoofing'
 
 
 model = build_model((12, 150, 1))

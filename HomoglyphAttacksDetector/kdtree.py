@@ -15,11 +15,19 @@ from keras import backend as K
 from keras.models import Sequential, Model, model_from_json
 from keras.utils.vis_utils import plot_model
 from keras.layers import Dense, Input, Lambda, Flatten, Conv2D, MaxPooling2D
+import flask
+from flask import request
+import tensorflow as tf
+import idna
+
+app = flask.Flask(__name__)
 
 dataset_type = "process"
 
 OUTPUT_DIR = 'output'
 
+global graph
+graph = tf.get_default_graph()
 model = build_model((12, 150, 1))
 
 model.load_weights(os.path.join(
@@ -109,13 +117,26 @@ def query(q):
     X = np.reshape(X,(1, X.size))
     
     #print(X)
-    results = query_build_flann_tree(X, 5)
+    results = query_build_flann_tree(X, 2)
     return [rows[i] for i in results]
     # build_flann_tree(multiplier=1)
     # build_kd_tree(multiplier=1)
 
+@app.route("/predict", methods=["GET","POST"])
+def suggest():
+    ...
+    # You need to use the following line
+    with graph.as_default():
+        decoded_url = idna.decode(request.args.get('url').encode('utf-8'))
+        print(decoded_url)
+        result = query(decoded_url)
+    # return a response in json format 
+    message = {'status': 200, 'suggestions': result}
+    return flask.jsonify(message) 
+
 def main():
     #save_feature_vectors_10k('top10k.npy')
-    print(query("googļę.com"))
+    #print(query("googļę.com"))
+    app.run(host='localhost')
 if __name__ == "__main__":
     main()

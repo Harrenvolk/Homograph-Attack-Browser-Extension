@@ -2,10 +2,10 @@ console.log("Listening for message")
 window.onload = function() {
     document.getElementById("b1").onclick = function () {
         chrome.storage.sync.get(['url'], function(result) {
-            fetch(`http://localhost:5335/?url=${result.url}`)
+            fetch("http://localhost:5000/predict?url=" + result.url.replace(/^http?:\/\//, '').replace('/',''))
             .then(r => r.json())
             .then(r => {
-                document.querySelector('#Hi').innerHTML=JSON.stringify(r);
+                document.querySelector('#Hi').innerHTML=JSON.stringify(r.suggestions);
             })
             .catch(err => console.error(err))
         });
