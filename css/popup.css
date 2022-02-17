@@ -1,0 +1,31 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 300px;
+    margin-top: -10px;
+}
+
+#suggested_links {
+    display: none;
+}
+
+ul {
+    list-style: none;
+}
+
+ul > li {
+    cursor: pointer;
+    color: cornflowerblue;
+}
+
+ul li:hover{
+    color: rgb(38, 98, 209);
+}
+
+.defaultlinks {
+    width: fit-content;
+}

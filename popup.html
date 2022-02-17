@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="popup.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/popup.js"></script>
 </head>
+
 <body>
-<h1 id="Hi">Hi</h1>
-<button id="b1">Continue to site</button>
-<button id="closebutton">Close</button>
+    <h1 id="safe" class="bg-success text-white px-3 py-4 my-0">You're safe!</h1>
+    <section id="suggested_links">
+        <div class="danger-warning bg-danger text-white px-3 py-4">
+            <h2>Danger!</h2>
+            <h4>The site you are about to visit could be trying to trick you.</h4>
+        </div>
+        <p class="m-3">Were you trying to visit one of these websites instead?</p>
+        <ul class="links ml-3">
+        </ul>
+    </section>
+    <button id="dummy" class="w-0 h-0" style="visibility: hidden;"></button>
+    <div class="defaultlinks mx-auto mb-3">
+        <button class="btn btn-warning" id="b1">Continue to site</button>
+        <button class="btn btn-warning" id="closebutton">Close</button>
+    </div>
 </body>
+
 </html>
