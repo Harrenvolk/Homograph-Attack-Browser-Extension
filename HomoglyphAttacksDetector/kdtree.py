@@ -101,7 +101,7 @@ def query_build_flann_tree(query, n):
     feature_vectors = np.load('top10k.npy')
     flann = FLANN()
     result, dists = flann.nn(feature_vectors, query, n, algorithm="kmeans", branching=64, iterations=7, checks=512)
-    return result[0]
+    return result[0], dists[0][0]
 
 
 def query(q):
@@ -117,8 +117,8 @@ def query(q):
     X = np.reshape(X,(1, X.size))
     
     #print(X)
-    results = query_build_flann_tree(X, 2)
-    return [rows[i] for i in results]
+    results, dist = query_build_flann_tree(X, 10)
+    return [rows[i] for i in results], 'safe' if dist > 0.05 else 'unsafe'
     # build_flann_tree(multiplier=1)
     # build_kd_tree(multiplier=1)
 
@@ -129,9 +129,9 @@ def suggest():
     with graph.as_default():
         decoded_url = idna.decode(request.args.get('url').encode('utf-8'))
         print(decoded_url)
-        result = query(decoded_url)
+        result, verdict = query(decoded_url)
     # return a response in json format 
-    message = {'status': 200, 'suggestions': result}
+    message = {'status': 200, 'suggestions': result, 'verdict': verdict}
     return flask.jsonify(message) 
 
 def main():
