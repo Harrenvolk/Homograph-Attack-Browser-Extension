@@ -127,7 +127,7 @@ def suggest():
     ...
     # You need to use the following line
     with graph.as_default():
-        decoded_url = idna.decode(request.args.get('url'))
+        decoded_url = idna.decode(request.args.get('url').encode('utf-8'))
         print(decoded_url)
         result, verdict = query(decoded_url)
     # return a response in json format 
