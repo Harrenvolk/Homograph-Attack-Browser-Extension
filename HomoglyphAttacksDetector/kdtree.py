@@ -117,8 +117,17 @@ def query(q):
     X = np.reshape(X,(1, X.size))
     
     #print(X)
-    results, dist = query_build_flann_tree(X, 10)
-    return [rows[i] for i in results], 'safe' if dist > 0.05 else 'unsafe'
+    results, dists = query_build_flann_tree(X, 2)
+    print(results, dists)
+    verdicts = []
+    for dist in dists:
+        if dist > 0.05:
+            verdicts.append('safe')
+        elif dist < 0.05 and dist > 0.01:
+            verdicts.append('unsure')
+        else:
+            verdicts.append('unsafe')
+    return [rows[i] for i in results][0], verdicts[0]
     # build_flann_tree(multiplier=1)
     # build_kd_tree(multiplier=1)
 
