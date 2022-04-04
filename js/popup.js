@@ -7,7 +7,7 @@ window.onload = function () {
         }
         $('#dummy').on('click', () => {
             
-            const URL = "https://5041-202-164-132-133.ngrok.io/predict?url=" + result.url.split('://')[1].replace('/', '').replace('www.', '');
+            const URL = "https://1817-2409-4042-e96-62c8-c6ea-d338-39ca-c250.ngrok.io/predict?url=" + result.url.split('://')[1].replace('/', '').replace('www.', '');
             // const URL = "https://5041-202-164-132-133.ngrok.io/predict?url=" + result.url.replace(/^http+:\/\//, '').replace('/', '').replace('www.', '');
             // $("#safe").text(result.url + '   ' + URL);
             fetch(URL)
