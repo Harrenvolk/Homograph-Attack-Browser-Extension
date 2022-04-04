@@ -14,10 +14,12 @@ function check_suspicious_links() {
         if (is_punycode(all_links[i].href)) {
             if(all_links[i].className.includes(CUSTOM_CLASS_NAME)) continue;
             all_links[i].className = CUSTOM_CLASS_NAME;
-            let converted_domain_name=all_links[i].href.split('://')[1].replace('/', '').replace('www.', '')
+            let splits=all_links[i].href.split('://');
+            let converted_domain_name=splits[splits.length-1].replace('/', '').replace('www.', '')
             fetch("https://e502-2409-4071-e9c-675c-e2be-de72-d414-4e79.ngrok.io/predict?url="+converted_domain_name)
                 .then(r => r.json())
                 .then((r) => {
+                    console.log(converted_domain_name,r);
                     if(r.verdict==="unsafe"){
                         all_links[i].style = "background-color:#fb8181"
                         all_links[i].onclick=() => window.confirm("This link might be trying to imitate another website. Are you sure you want to go to the link?");
